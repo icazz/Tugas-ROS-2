@@ -15,7 +15,7 @@ int main(int argc, char **argv) {
     ros::Publisher velocity_pub = nh.advertise<geometry_msgs::Twist>("/turtle1/cmd_vel", 10);
     ros::Rate rate(10);
 
-    //ros::ServiceClient spawn = nh.serviceClient<turtlesim::Spawn>("/turtle1/spawn");
+    ros::ServiceClient spawn = nh.serviceClient<turtlesim::Spawn>("/turtle1/spawn");
 
 
     VideoCapture capture("Video.avi");
@@ -34,15 +34,16 @@ int main(int argc, char **argv) {
     Point2f center(frame.cols / 2.0f, frame.rows / 2.0f);
     Point2f position(39.288, 35.783); // Didapat dari frame pertama, diperoleh dari codingan terpisah
 
-    // turtlesim::Spawn spawn_msg;
-    // spawn_msg.x = position.x / 100.0f;
-    // spawn_msg.y = position.y / 100.0f;
-    // spawn_msg.name = "ball";
+    turtlesim::Spawn spawn_msg;
+    spawn_msg.x = position.x / 100.0f;
+    spawn_msg.y = position.y / 100.0f;
+    spawn_msg.name = "ball";
 
-    // if (!spawn_client.call(spawn_msg)) {
-    //     cerr << "Failed to spawn turtle." << endl;
-    //     return -1;
-    // }
+    if (!spawn_client.call(spawn_msg)) {
+        cerr << "Failed to spawn turtle." << endl;
+    
+        return -1;
+    }
 
     Mat hsv_frame;
 
