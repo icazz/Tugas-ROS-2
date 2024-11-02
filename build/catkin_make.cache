@@ -1,0 +1,2 @@
+draw
+-DCATKIN_DEVEL_PREFIX=/home/zika/drawing/devel -DCMAKE_INSTALL_PREFIX=/home/zika/drawing/install -G Unix Makefiles
